@@ -1,0 +1,7 @@
+{
+  "name": "bancofac",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
