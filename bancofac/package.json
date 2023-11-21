@@ -12,7 +12,7 @@
     "lint": "ng lint"
   },
   "private": true,
-  "dependencies": {
+  "peerDependencies": {
     "@angular/animations": "^17.0.2",
     "@angular/common": "^17.0.2",
     "@angular/compiler": "^17.0.2",
