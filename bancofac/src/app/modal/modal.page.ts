@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DataService, Note } from '../services/data.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal.page.scss'],
 })
 export class ModalPage implements OnInit {
-
-  constructor() { }
-
+  @Input()
+  id!: string;
+  note: Note | null = null;
+  constructor(private dataService: DataService, private modalCtrl: ModalController) { }
+  
   ngOnInit() {
+    this.dataService.getNoteById(this.id).subscribe(res => {
+    this.note = res;    
+    });
   }
 
 }
