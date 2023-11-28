@@ -6,16 +6,18 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
   providedIn: 'root'
 })
 export class AuthService {
+
+ 
  
 
   constructor(private auth : Auth) {}
 
-  async register( email: string, password: string ) {
+  async register( reg : any) {
    try{
     const user = await createUserWithEmailAndPassword(
       this.auth,
-      email,
-      password
+      reg.email,
+      reg.password
     );
     return user; 
    } catch (e) {
@@ -23,12 +25,12 @@ export class AuthService {
    }
   }
 
-  async login( email: string, password: string) {
+  async login( log : any) {
     try{
       const user = await signInWithEmailAndPassword(
         this.auth,
-        email,
-        password
+        log.email, 
+        log.password 
       );
       return user; 
      } catch (e) {

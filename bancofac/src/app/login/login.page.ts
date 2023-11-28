@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  credentials: FormGroup | any;  
+  credentials!: FormGroup | any;  
 
   constructor(
     private fb: FormBuilder,
@@ -21,7 +21,9 @@ export class LoginPage implements OnInit {
     ) {}
 
     get email(){ 
+      console.log(this.credentials);
       return this.credentials.get('email');
+      
     }
 
     get password(){
@@ -45,11 +47,23 @@ export class LoginPage implements OnInit {
     if (user){ 
       this.router.navigateByUrl('/home', { replaceUrl: true});
         } else{
-
+      this.showAlert('Registro falhou', 'Por favor,tente novamente'); 
     }
   }
 
-  async login() {}
+  async login() {
+    const loading = await this.loadingController.create(); 
+    await loading.present(); 
+
+    const user = await this.authService.login(this.credentials.value);
+    await loading.dismiss(); 
+
+    if (user){ 
+      this.router.navigateByUrl('/home', { replaceUrl: true});
+        } else{
+      this.showAlert('Login falhou', 'Por favor,tente novamente'); 
+    }
+  }
 
   async showAlert( header: string,  message: string) {
     const alert = await this.alertController.create({
