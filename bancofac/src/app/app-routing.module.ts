@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([ '' ]);
+const redirectLoggedInToRegister = () => redirectLoggedInTo(['login'])
 const redirectLoggedInToProfile = () => redirectLoggedInTo([ 'profile' ]);
 
 
@@ -30,6 +31,12 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule),
+    ...canActivate(redirectLoggedInToRegister)
+  },
+
 
 
 ];

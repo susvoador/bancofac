@@ -17,10 +17,12 @@ export class AvatarService {
   ) {}
 
   getUserProfile() {
-     const user = this.auth.currentUser;
-     const userDocRef = doc(this.firestore, `users/${user.uid}`)
+     const user =this.auth.currentUser
+    
   }
 
-  async uploadImage(cameraFile: Photo) {}
+  async uploadImage(cameraFile: Photo) {
+    const user = this.auth.currentUser; 
+  }
   
 }
